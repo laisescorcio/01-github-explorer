@@ -1,4 +1,5 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     mode: 'development', // modo de desenvolvimento do webpack - evita de rodar otimizações que seriam feitas em produção
@@ -10,6 +11,11 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'] // extensões que podem ser lidos
     },
+    plugins: [ // para não inserir uma tag script no html para o bundle, esse plugin injeta o webpack no html
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'public', 'index.html')
+        })
+    ],
     module: { // como a aplicação irá se comportar em diferente tipos de arquivos
         rules: [ // array de regras
             {
